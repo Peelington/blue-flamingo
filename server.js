@@ -3,16 +3,18 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const path = require("path")
 
 //middleware
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(express.static(path.join(__dirname, "client", "dist")))
 
 mongoose.set('strictQuery', false)
 
 async function connectToDB() {
   try {
-    await mongoose.connect('mongodb+srv://altonpeel123:y9X1PpyLBxIMYcLv@cluster0.5gl6zwk.mongodb.net/')
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
   } catch (err) {
     console.log(err)
   }
@@ -29,6 +31,10 @@ app.use((err, req, res, next) => {
   console.log(err)
   return res.send({ errsMsg: err.message })
 })
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 //listen
 app.listen(9000, () => {
