@@ -12,23 +12,25 @@ export default function Home(props) {
   // const {productItems} = props
   
   
-  // const storeItems = productItems.map(product =>
-  //   <StoreProducts
-  //     key={product._id}
-  //     item={product.item}
-  //     type={product.type}
-  //     imgurl={product.imgurl}
-  //     price={product.price}
-  //     material={product.material}
-  //     productId = {product._id}
-  //   />
-  // )
-
+  const storeItems = productItems.map(product =>
+    <StoreProducts
+      key={product._id}
+      item={product.item}
+      type={product.type}
+      imgurl={product.imgurl}
+      price={product.price}
+      material={product.material}
+      productId = {product._id}
+    />
+  )
+ if(!storeItems){
+  return <div>...Loading</div>
+ }
 
   return (
     <>
       
-      {/* {storeItems} */}
+      {storeItems}
     </>
   )
 }
