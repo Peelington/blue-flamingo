@@ -10,7 +10,7 @@ export default function Home(props) {
 
   const {productItems} = useContext(ProductContext)
   // const {productItems} = props
-  
+  console.log(productItems)
   
   const storeItems = productItems.map(product =>
     <StoreProducts
@@ -23,9 +23,9 @@ export default function Home(props) {
       productId = {product._id}
     />
   )
- if(!storeItems){
-  return <div>...Loading</div>
- }
+//  if(!storeItems){
+//   return <div>...Loading</div>
+//  }
 
   return (
     <>
